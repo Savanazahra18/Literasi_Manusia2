@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Affecta</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="auth.js" defer></script>
+</head>
+<body>
+  <div class="auth-container" id="loginPage">
+    <div class="auth-box">
+      <h1><i class="fas fa-smile-beam"></i> Welcome Back</h1>
+      <form id="loginForm">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="username" placeholder="Username" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login <i class="fas fa-arrow-right"></i></button>
+      </form>
+      <p class="auth-switch">Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+    </div>
+  </div>
+
+  <div class="auth-container hidden" id="registerPage">
+    <div class="auth-box">
+      <h1><i class="fas fa-user-plus"></i> Create Account</h1>
+      <form id="registerForm">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="regUsername" placeholder="Username" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="regEmail" placeholder="Email" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="regPassword" placeholder="Password" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <button type="submit">Register <i class="fas fa-user-plus"></i></button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+    </div>
+  </div>
+</body>
+</html>

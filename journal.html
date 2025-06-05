@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relaksasi Emosi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="relaxation.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="main-container" id="journalPage">
+    <nav class="top-nav">
+      <h1><i class="fas fa-spa"></i> Halaman Relaksasi</h1>
+      <div class="nav-links">
+        <button class="nav-btn" onclick="goTo('dashboard.html')"><i class="fas fa-home"></i> Dashboard</button>
+        <button class="nav-btn" onclick="goTo('history.html')"><i class="fas fa-history"></i> Riwayat</button>
+        <button class="nav-btn" onclick="goTo('relaxation.html')"><i class="fas fa-book"></i> Relaxation</button>
+        <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </nav>
+
+    <div class="journal-content">
+      <h2><i class="fas fa-book-open"></i> Jurnal Emosi Harian</h2>
+      <p class="quote-box">"Menulis adalah cara hati berbicara. Tuliskan dan lepaskan bebanmu hari ini."</p>
+
+      <form id="journalForm">
+        <label for="journalDate">Tanggal:</label>
+        <input type="date" id="journalDate" required />
+
+        <label for="mood">Perasaan Saat Ini:</label>
+        <select id="mood" required>
+          <option value="">-- Pilih --</option>
+          <option value="Bahagia">😊 Bahagia</option>
+          <option value="Sedih">😢 Sedih</option>
+          <option value="Marah">😠 Marah</option>
+          <option value="Tenang">😌 Tenang</option>
+          <option value="Cemas">😰 Cemas</option>
+        </select>
+
+        <label for="note">Catatan Harian:</label>
+        <textarea id="note" rows="5" placeholder="Tuliskan pengalaman emosionalmu di sini..." required></textarea>
+
+        <button type="submit" class="relax-btn"><i class="fas fa-save"></i> Simpan Jurnal</button>
+      </form>
+
+      <div class="journal-entries">
+        <h3><i class="fas fa-clipboard-list"></i> Riwayat Jurnal Kamu</h3>
+        <ul id="entryList"></ul>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("journalForm");
+      const entryList = document.getElementById("entryList");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const date = document.getElementById("journalDate").value;
+        const mood = document.getElementById("mood").value;
+        const note = document.getElementById("note").value;
+
+        const entry = { date, mood, note };
+        const entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+        entries.push(entry);
+        localStorage.setItem("journalEntries", JSON.stringify(entries));
+
+        displayEntries();
+        form.reset();
+      });
+
+      function deleteEntry(index) {
+        const entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+        entries.splice(index, 1); // Hapus entri berdasarkan index
+        localStorage.setItem("journalEntries", JSON.stringify(entries));
+        displayEntries();
+      }
+
+      function displayEntries() {
+        const entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+        entryList.innerHTML = "";
+        entries.forEach((entry, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${entry.date}</strong> - ${entry.mood}<br>
+            <em>${entry.note}</em>
+            <br>
+            <button onclick="deleteEntry(${index})" class="delete-btn"><i class="fas fa-trash-alt"></i> Hapus</button>
+            <hr>
+          `;
+          entryList.appendChild(li);
+        });
+      }
+
+      window.onload = displayEntries;
+    </script>
+  </div>
+</body>
+</html>

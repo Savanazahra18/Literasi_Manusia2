@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relaksasi Emosi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="relaxation.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    function goTo(page) {
+      window.location.href = page;
+    }
+
+    function logout() {
+      alert("Yakin ingin logout? 😢");
+      window.location.href = "login.html";
+    }
+
+    function playRelaxSound() {
+      const sound = document.getElementById("relaxSound");
+      sound.play();
+    }
+
+    function stopRelaxSound() {
+      const sound = document.getElementById("relaxSound");
+      sound.pause();
+      sound.currentTime = 0; // kembali ke awal lagu
+    }
+  </script>
+</head>
+<body>
+ <div class="main-container" id="relaxationPage">
+    <nav class="top-nav">
+      <h1><i class="fas fa-spa"></i> Halaman Relaksasi</h1>
+      <div class="nav-links">
+        <button class="nav-btn" onclick="goTo('dashboard.html')"><i class="fas fa-home"></i> Dashboard</button>
+        <button class="nav-btn" onclick="goTo('history.html')"><i class="fas fa-history"></i> Riwayat</button>
+        <button class="nav-btn" onclick="goTo('journal.html')"><i class="fas fa-book"></i> Jurnal</button>
+        <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </nav>
+
+    <div class="relaxation-content">
+      <h2>Tenangkan Pikiranmu 😌</h2>
+
+      <div class="breath-animation"></div>
+      <p class="quote-box">"Tarik napas... tahan... hembuskan... seperti kamu menghembuskan masalah-masalah hari ini 😄"</p>
+
+      <button class="relax-btn" onclick="playRelaxSound()">
+        <i class="fas fa-music"></i> Mainkan Suara Menenangkan
+      </button>
+
+      <button class="relax-btn stop" onclick="stopRelaxSound()">
+        <i class="fas fa-stop"></i> Stop Musik
+      </button>
+
+      <audio id="relaxSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9e0f3913e6.mp3" type="audio/mp3"></audio>
+
+      <div class="gif-box">
+        <h3>Butuh pelukan virtual? Kucing ini siap bantu! 🐱</h3>
+        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Funny cat gif" />
+      </div>
+
+      <p class="quote-box">"Kalau hidupmu terasa berat, ingat... bahkan kucing ini nggak mikirin skripsi!" 😹</p>
+    </div>
+  </div>
+</body>
+</html>
